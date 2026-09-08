@@ -3,6 +3,7 @@
 EncodeKit is a free, open-source, portable Windows batch video converter and FFmpeg GUI. Queue MP4, MKV, and other video files, compress them for personal use, or YouTube with AV1 or NVIDIA NVENC support, convert formats, strip audio, extract JPEG frames, and let encodes run in the background — no installer. Presets live in a simple `.ini` file, so you can tweak the built-in profiles or add your own.
 
 ---
+<img width="1458" height="940" alt="{62DE4E06-BC1C-4815-9025-6B6CBB590656}" src="https://github.com/user-attachments/assets/87b3686f-551a-4686-92b4-43d66f1c22f7" />
 
 ## What it is
 
@@ -15,27 +16,19 @@ EncodeKit is a small WinForms front-end around `ffmpeg.exe`. You keep your own p
 - Writes next to the source file, or into a folder you choose
 - On every run, it creates a shortcut for itself in "Send To" for easy access for any files to be added using context menu.
 - On every launch, EncodeKit writes a shortcut into the Windows **Send to** menu so you can right-click any file and add it to the open queue.
-
-It is meant to live on a USB stick or a tools folder: copy the directory, drop in FFmpeg, run.
-
+- It is meant to live on a USB stick or a tools folder: copy the directory, drop in FFmpeg, run.
 ---
 
-## Layout
+## Why use it
 
-```
-EncodeKit.exe
-assets\
-  EncodeKit.cs
-  presets.ini
-  settings.ini
-  ffmpeg.exe        (included)
-  ffprobe.exe      (included)
-  app.ico          (optional)
-  last_preset.txt  (created at runtime)
-  dest.txt         (created at runtime)
-```
-
-`ffmpeg.exe` and `ffprobe.exe` are not bundled. Use a recent Windows GPL build (BtbN / gyan.dev both work). Put both binaries in `assets`.
+- **Batch, not one file at a time.** Queue a folder, walk away.
+- **Presets you own.** The command is an ini file, not buried in a GUI. Copy, tweak, share.
+- **Video is not re-encoded unless you ask.** Mute is `-c copy -an`. JPEG dump is a frame extract. YouTube-like presets are the ones that actually compress.
+- **GPU when you have it, CPU when you don’t.** Same list, CUDA rows disappear on machines without NVIDIA.
+- **Portable.** No installer, no registry, no `%APPDATA%` requirement. The exe + `assets` folder is the whole app.
+- **The desktop stays usable.** Thread cap + BelowNormal ffmpeg so a 4-hour AV1 job does not freeze Explorer.
+- **Send To.** Right-click a clip in Explorer, it lands in the open queue.
+- **You can see the command.** The log prints the exact ffmpeg line so you can debug or paste it elsewhere.
 
 ---
 
@@ -122,16 +115,22 @@ priority=BelowNormal
 
 ---
 
-## Why use it
+## Layout
 
-- **Batch, not one file at a time.** Queue a folder, walk away.
-- **Presets you own.** The command is an ini file, not buried in a GUI. Copy, tweak, share.
-- **Video is not re-encoded unless you ask.** Mute is `-c copy -an`. JPEG dump is a frame extract. YouTube-like presets are the ones that actually compress.
-- **GPU when you have it, CPU when you don’t.** Same list, CUDA rows disappear on machines without NVIDIA.
-- **Portable.** No installer, no registry, no `%APPDATA%` requirement. The exe + `assets` folder is the whole app.
-- **The desktop stays usable.** Thread cap + BelowNormal ffmpeg so a 4-hour AV1 job does not freeze Explorer.
-- **Send To.** Right-click a clip in Explorer, it lands in the open queue.
-- **You can see the command.** The log prints the exact ffmpeg line so you can debug or paste it elsewhere.
+```
+EncodeKit.exe
+assets\
+  EncodeKit.cs
+  presets.ini
+  settings.ini
+  ffmpeg.exe       
+  ffprobe.exe      
+  app.ico          (optional)
+  last_preset.txt  (created at runtime)
+  dest.txt         (created at runtime)
+```
+
+`ffmpeg.exe` and `ffprobe.exe` are not bundled. Use a recent Windows GPL build (BtbN / gyan.dev both work). Put both binaries in `assets`.
 
 ---
 
@@ -142,12 +141,13 @@ You need:
 - Windows 10/11 x64
 - .NET Framework 4.x (the `csc.exe` that ships with Windows / the 4.8 Developer Pack is enough — Visual Studio is optional)
 - This folder: `EncodeKit.cs`, `presets.ini`, `settings.ini`, `build.bat`
-- `ffmpeg.exe` and `ffprobe.exe` (GPL Static build preferred) to actually encode (included in source/assets folder)
+- `ffmpeg.exe` and `ffprobe.exe`
 
 ### Seteps
 
 - Download Source Folder, then run the build.bat file, this should be the content of the bat file.
 - You can change the app icon as needed. the build uses app.ico by default included in the assets folder
+- get latest FFMPEG GPL Static version from: [FFmpeg's Github]([url](https://github.com/BtbN/FFmpeg-Builds/releases/tag/latest))). Extract ffmpeg.exe and ffprobe.exe files from /bin directory into source/assets folder.
 
 ```bat
 @echo off
@@ -181,4 +181,3 @@ pause
 If `csc.exe` is missing, install the .NET Framework 4.8 Developer Pack (or Visual Studio with the .NET desktop workload) and run `build.bat` again.
 
 There are no NuGet packages and no project file. One `.cs` file in, one `.exe` out.
-```
