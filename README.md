@@ -134,69 +134,24 @@ priority=BelowNormal
 
 ---
 
-## Layout
-
-```
-EncodeKit.exe
-assets\
-  EncodeKit.cs
-  presets.ini
-  settings.ini
-  ffmpeg.exe       
-  ffprobe.exe      
-  app.ico          (optional)
-  last_preset.txt  (created at runtime)
-  dest.txt         (created at runtime)
-```
-
-`ffmpeg.exe` and `ffprobe.exe` are not bundled. Use a recent Windows GPL build (BtbN / gyan.dev both work). Put both binaries in `assets`.
-
----
-
 ## Build from source
 
 You need:
 
-- Windows 10/11 x64
-- .NET Framework 4.x (the `csc.exe` that ships with Windows / the 4.8 Developer Pack is enough — Visual Studio is optional)
-- This folder: `EncodeKit.cs`, `presets.ini`, `settings.ini`, `build.bat`
-- `ffmpeg.exe` and `ffprobe.exe`
+* Windows 10/11 x64
+* An internet connection the first time you build (so `build.bat` can fetch FFmpeg)
+* .NET Framework 4.x — the `csc.exe` that ships with Windows is enough. Visual Studio is optional. If the compiler is missing, install the [.NET Framework 4.8 Developer Pack](https://dotnet.microsoft.com/download/dotnet-framework/net48)
 
-### Seteps
+The `source` folder already has `EncodeKit.cs`, `presets.ini`, `settings.ini`, `app.ico`, and `build.bat`. There are no NuGet packages and no `.csproj`.
 
-- Download Source Folder, then run the build.bat file, this should be the content of the bat file.
-- You can change the app icon as needed. the build uses app.ico by default included in the assets folder
-- get latest FFMPEG GPL Static version from: [FFmpeg's Github]([url](https://github.com/BtbN/FFmpeg-Builds/releases/tag/latest))). Extract ffmpeg.exe and ffprobe.exe files from /bin directory into source/assets folder.
+### Steps
 
-```bat
-@echo off
-setlocal
-set CSC=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe
-if not exist "%CSC%" (
-  echo C# compiler not found.
-  pause
-  exit /b 1
-)
-if not exist "assets\EncodeKit.cs" (
-  echo assets\EncodeKit.cs not found.
-  pause
-  exit /b 1
-)
-if not exist "assets\app.ico" (
-  echo assets\app.ico not found.
-  pause
-  exit /b 1
-)
-"%CSC%" /nologo /optimize+ /target:winexe /out:EncodeKit.exe /win32icon:assets\app.ico /r:System.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll assets\EncodeKit.cs
-if errorlevel 1 (
-  echo Build failed.
-  pause
-  exit /b 1
-)
-echo Built EncodeKit.exe
-pause
-```
+1. Download the source (clone this repo, or **Code → Download ZIP** and extract it).
+2. Open the folder that contains `build.bat`.
+3. Double-click `build.bat`.
 
-If `csc.exe` is missing, install the .NET Framework 4.8 Developer Pack (or Visual Studio with the .NET desktop workload) and run `build.bat` again.
+The script compiles `EncodeKit.exe` and downloads a current **FFmpeg GPL static** build, then places `ffmpeg.exe` and `ffprobe.exe` in `assets`. When it finishes, run `EncodeKit.exe` from that same folder.
 
-There are no NuGet packages and no project file. One `.cs` file in, one `.exe` out.
+Optional: replace `assets\app.ico` before you build if you want a different icon. `build.bat` uses that file by default.
+
+If `csc.exe` is missing, install the Developer Pack (or Visual Studio with the .NET desktop workload) and run `build.bat` again.
