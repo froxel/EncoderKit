@@ -29,8 +29,7 @@ No installer. No admin rights. Download the zip, extract it, run `EncodeKit.exe`
 
 1. Click **Download** above.
 2. Extract the zip anywhere you like (Desktop, USB stick, tools folder).
-3. Put `ffmpeg.exe` and `ffprobe.exe` in the `assets` folder if they are not already there.
-4. Double-click `EncodeKit.exe`.
+3. Double-click `EncodeKit.exe`.
 
 That is the whole app: the exe plus the `assets` folder. Copy the folder to another PC and it still runs.
 
