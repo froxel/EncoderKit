@@ -1014,7 +1014,7 @@ sealed class MainForm : Form
         if (src <= 0) return size;
         double pct = (dst - src) * 100.0 / src;
         string sign = pct > 0 ? "+" : "";
-        return size + " (" + sign + pct.ToString("0") + "%)";
+        return "Open " + size + " (" + sign + pct.ToString("0") + "%)";
     }
 
     void OnLoadForm(object sender, EventArgs e)
