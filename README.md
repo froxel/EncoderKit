@@ -19,6 +19,26 @@ EncodeKit is a small WinForms front-end around `ffmpeg.exe`. You keep your own p
 - It is meant to live on a USB stick or a tools folder: copy the directory, drop in FFmpeg, run.
 ---
 
+## Installation
+
+No installer. No admin rights. Download the zip, extract it, run `EncodeKit.exe` from that folder.
+
+[![Download EncodeKit v1.0.0](https://img.shields.io/badge/Download-EncodeKit%20v1.0.0-2ea44f?style=for-the-badge&logo=github)](https://github.com/froxel/EncoderKit/releases/download/v1.0.0.0/EncodeKit-V1.0.0.zip)
+
+**[All versions](https://github.com/froxel/EncoderKit/releases)**
+
+1. Click **Download** above.
+2. Extract the zip anywhere you like (Desktop, USB stick, tools folder).
+3. Put `ffmpeg.exe` and `ffprobe.exe` in the `assets` folder if they are not already there.
+4. Double-click `EncodeKit.exe`.
+
+That is the whole app: the exe plus the `assets` folder. Copy the folder to another PC and it still runs.
+
+
+
+
+
+
 ## Why use it
 
 - **Batch, not one file at a time.** Queue a folder, walk away.
